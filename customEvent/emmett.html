@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>emmett demo</title>
+</head>
+<body>
+    
+<script src="emmett.js"></script>
+<script>
+
+
+var emitter = new Emitter();
+emitter.on('myEvent', function(e){ //콜백함수
+    console.log('*****',e);
+});
+
+
+
+setTimeout(function(){
+    emitter.off('myEvent');
+    // emitter.listeners('myEvent');
+    // emitter.disable();
+    // emitter.enable();
+    // emitter.kill();
+},3000);
+
+setInterval(function(){
+    emitter.emit('myEvent','ajax끝났으니 다음의 임무를 실행해라')
+},1000);
+
+//ajax결과를 받은후 실행해야 콜백함수를 
+// ajax가져온후 , 바로 실행. setTimeout는 예측실행보다 나은것은 . addEventListener()
+
+
+
+
+// 몇초 지연해서 실행 (1000ms= 1s)
+function delayRun(callback, msTime=0){
+    if(msTime==0) callback();
+    else{
+        setTimeout(function(){
+            callback();
+        }, msTime);
+    }
+}
+
+
+
+
+//============================================================================
+
+/* 
+
+// https://github.com/jacomyal/emmett
+
+// You can install Emmett through npm:
+
+// npm install --save emmett
+// Or you can just drop the emmett.min.js file in your project (will work with many popular module systems).
+
+// Usage
+// ----------Creating an emitter
+var Emitter = require('emmett');
+var emitter = new Emitter();
+
+
+// Extending the emitter
+// Node.js
+var util = require('util'),
+    Emitter = require('emmett');
+
+function MyObject() {
+	Emitter.call(this);
+}
+
+util.inherits(MyObject, Emitter);
+
+
+// ES6 class
+import Emitter from 'emmett';
+class MyObject extends Emitter {
+    //
+}
+
+
+
+// -------------Listening to events
+// Basic
+emitter.on('eventName', callback);
+
+// Once
+emitter.once('eventName', callback);
+
+// Using ES6 symbol as event name
+const sym = Symbol();
+emitter.on(sym, callback);
+
+// Matching event names with a regex
+emitter.on(/^event/, callback);
+
+// Options
+emitter.on('eventName', callback, {scope: customScope, once: true});
+
+// Polymorphisms
+emitter.on(['event1', 'event2'], callback);
+
+emitter.on({
+	event1: callback1,
+	event2: callback2
+});
+
+// Listening to every events
+emitter.on(callback);
+
+
+
+// ------------Event data
+// Events are objects having the following keys:
+
+// data: the data attached to the event.
+// type: the event type.
+// target: the event emitter.
+
+emitter.on('myEvent', function(e) {
+	console.log(e.data);
+});
+
+emitter.emit('myEvent', 'Hello World!');
+
+// Will print "Hello World!" in the console
+
+
+// ------------Removing listeners
+// Basic
+emitter.off('eventName', callback);
+
+// Removing every listeners attached to the given event
+emitter.off('eventName');
+
+// Removing the callback from any event
+emitter.off(callback);
+
+// Polymorphisms
+emitter.off(['event1', 'event2'], callback);
+
+emitter.off({
+	event1: callback1,
+	event2: callback2
+});
+
+// Removing every listeners
+emitter.unbindAll();
+
+
+
+// ----------Emitting
+// Basic
+emitter.emit('eventName');
+
+// With data
+emitter.emit('eventName', {hello: 'world'});
+
+// Polymorphisms
+emitter.emit(['event1', 'event2']);
+emitter.emit(['event1', 'event2'], {hello: 'world'});
+
+emitter.emit({
+	event1: 'hey',
+	event2: 'ho'
+});
+
+ */
+
+
+</script>
+
+
+</body>
+</html>
+
